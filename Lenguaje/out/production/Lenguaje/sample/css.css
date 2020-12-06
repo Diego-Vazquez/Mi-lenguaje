@@ -1,0 +1,106 @@
+.text-area{
+-fx-background-color: white;
+-fx-border-color: Black;
+-fx-text-fill: Black;
+}
+
+.numeracion{
+-fx-background-color: #ededed;
+-fx-border-color: Black;
+-fx-text-fill: Black;
+}
+
+
+.text-area .scroll-pane{
+-fx-background-color: TRANSPARENT;
+}
+
+
+.text-area .scroll-pane .viewport{
+-fx-background-color: TRANSPARENT;
+}
+
+.text-area .scroll-pane .content{
+-fx-background-color: TRANSPARENT;
+}
+
+.text-area .scroll-pane .scroll-bar: vertical{
+-fx-background-color: TRANSPARENT;
+}
+
+.color-barra .scroll-pane .scroll-bar: vertical .thumb{
+-fx-background-color: gray;
+-fx-background-radius: 5;
+}
+.color-barra-numer .scroll-pane .scroll-bar: vertical .thumb{
+-fx-background-color: TRANSPARENT;
+-fx-background-radius: 5;
+}
+
+.text-area .scroll-pane .scroll-bar: horizontal{
+-fx-background-color: white;
+}
+
+.text-area .scroll-pane .scroll-bar: horizontal .thumb{
+-fx-background-color: gray;
+-fx-background-radius: 5;
+}
+.numeracion .scroll-pane .scroll-bar: horizontal .thumb{
+-fx-background-color: TRANSPARENT;
+-fx-background-radius: 5;
+}
+
+
+.menu-bar{
+-fx-background-color: purple;
+}
+
+.combo-box{
+-fx-background-color: purple;
+-fx-border-color: white;
+}
+
+.combo-box:select{
+-fx-text-fill: white;
+}
+
+.menu .label{
+-fx-text-fill: white;
+-fx-font-size: 14;
+}
+
+.menu-bar .container .menu-button:hover{
+-fx-background-color: white;
+}
+.menu-bar .container .menu-button:hover .label{
+-fx-text-fill: black;
+}
+
+
+.menu-bar .container .menu-button:showing{
+-fx-background-color: white;
+}
+.menu-bar .container .menu-button:showing .label{
+-fx-text-fill: black;
+}
+
+.context-menu{
+-fx-background-insets: 0,1,2;
+-fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+}
+
+
+.menu-item .label{
+-fx-text-fill: black;
+}
+
+.menu-item:focused{
+-fx-background-color: purple;
+}
+
+.menu-item:focused .label{
+-fx-text-fill: white;
+}
+
+.menu
+

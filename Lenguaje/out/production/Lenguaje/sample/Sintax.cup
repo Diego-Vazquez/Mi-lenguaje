@@ -1,0 +1,51 @@
+package sample;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+:};
+
+terminal Dobl, Str, Int, If, Else, For, Do, Switch, Bol, Case, Print, While, Main, Igual, Suma, Resta, Multiplicacion,
+Division, Bloque_abierto, Dos_puntos, Bloque_cerrado, Clase_abierta, Clase_cerrada, Punto_y_coma, Coma, Punto, Menor_o_igual,
+Mayor_o_igual, Menor, Mayor, Equivale, Diferente, And, Or, Not, Incremento, Decremento, True, False, Comillas, Numero, Error;
+
+terminal String Identificador;
+
+non terminal INICIO, SENTENCIA, DECLARACION, DECLARACIONES, SENTENCIAS, INSTRUCCIONES, INSTRUCCION;
+
+
+start with INICIO;
+
+INICIO ::= Identificador Clase_abierta INSTRUCCIONES Clase_cerrada;
+
+INSTRUCCIONES ::= INSTRUCCION INSTRUCCIONES|INSTRUCCION;
+
+INSTRUCCION ::= DECLARACIONES|SENTENCIAS;
+
+SENTENCIAS ::= SENTENCIA;
+
+DECLARACIONES ::= DECLARACION;
+
+DECLARACION ::= Identificador Dos_puntos Int Punto_y_coma
+|Identificador Dos_puntos Int Igual Numero Punto_y_coma
+|Identificador Dos_puntos Dobl Punto_y_coma
+|Identificador Dos_puntos Dobl Igual Numero Punto Numero Punto_y_coma
+|Identificador Dos_puntos Str Punto_y_coma
+|Identificador Dos_puntos Str Igual Comillas Identificador Comillas Punto_y_coma
+|Identificador Dos_puntos Bol Punto_y_coma
+|Identificador Dos_puntos Bol Igual True Punto_y_coma
+|Identificador Dos_puntos Bol Igual False Punto_y_coma;
+
+SENTENCIA ::= Print Bloque_abierto Comillas Identificador Comillas Bloque_cerrado Punto_y_coma
+|Print Bloque_abierto Identificador Bloque_cerrado Punto_y_coma;
