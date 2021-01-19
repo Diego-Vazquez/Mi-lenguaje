@@ -59,5 +59,6 @@ void {lexico=yytext(); return Void;}
 "false" {lexico=yytext();return operador_boleano;}
 "\"" {lexico=yytext();return comilla;}
 {L}({L}|{D})* {lexico=yytext(); return Identificador;}
+"\""[a-zA-Z0-9 ,\t,\n,\r]+"\"" {lexico=yytext(); return Cadena;}
 ("(-"{D}+")")|{D}+ {lexico=yytext(); return Numero;}
  . {return ERROR;}

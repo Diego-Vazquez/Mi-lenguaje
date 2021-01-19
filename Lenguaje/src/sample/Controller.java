@@ -41,7 +41,13 @@ public class Controller {
     TextInputDialog inputDialog=new TextInputDialog();
     Configuraciones configuraciones=null;
     public static Configuraciones auxiliar=null;
+    public static String ruta_global;
+    public static TextArea consola_aux;
+
     @FXML protected void initialize(){
+
+        consola_aux=consola;
+        ruta_global=crear_carpeta_dafault();
         configuraciones=new Configuraciones(editor,(int) editor.getPrefWidth(),(int) editor.getPrefHeight());
         auxiliar=configuraciones;
         primerinicio=true;
@@ -53,7 +59,7 @@ public class Controller {
         File archivoo=new File(ruta);
         JFlex.Main.generate(archivoo);*/
         try {
-            analizar_lexico_presiso();
+            analizar_sintaxis();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,15 +68,39 @@ public class Controller {
 
     public void analizar_sintaxis() throws IOException {
         //aun no terminado
+        if (!consola.getText().isEmpty()){consola.clear();}
         String ST=(String) configuraciones.obtener_texto();
+
         Sintax s=new Sintax(new sample.Cup(new StringReader(ST)));
         try {
             s.parse();
-            consola.setText("Sintaxis correcta");
+            consola.appendText("    \n\n\n** La sintaxis es correcta **");
+
+
+
+
         } catch (Exception e) {
-            Symbol symbol= s.getS();
-            consola.setText("Error de sintaxis en linea: "+(symbol.right+1) +"/ "+symbol.value);
+          //  Symbol symbol= s.getS();
+            try {
+                Symbol symbol= s.getS();
+                consola.setText("   Error de sintaxis en linea: "+(symbol.right+1) +"      No se esperaba: "+symbol.value);
+                if(symbol==null) {
+                    consola.setText("   Error de Analisis");
+                }
+            }catch (Exception a){
+                switch (Sintax.codigo_error){
+                    case "0p":{ consola.setText(" ERROR "+Sintax.mensaje_error); break;}
+                    case "0i":{ consola.setText(" ERROR "+Sintax.mensaje_error); break;}
+                    case "0d":{ consola.setText(" ERROR "+Sintax.mensaje_error); break;}
+                    case "0s":{ consola.setText(" ERROR "+Sintax.mensaje_error); break;}
+                    default:{consola.setText("error desconocido ");}
+                }
+
+            }
+
+
         }
+        Sintax.colector_de_basura();
 
 
     }
@@ -102,6 +132,7 @@ public class Controller {
                 case Print:{resultado+= "<Reservada>\t\t"+lexer.lexico+"\n";break;}
                 case While:{resultado+= "<Reservada>\t\t"+lexer.lexico+"\n";break;}
                 case Identificador:{resultado+= "<identificador>\t\t"+lexer.lexico+"\n";break;}
+                case Cadena:{resultado+= "<Cadena>\t\t"+lexer.lexico+"\n";break;}
                 case bloque_abierto:{resultado+= "<inicio bloque>\t\t"+lexer.lexico+"\n";break;}
                 case bloque_cerrado:{resultado+= "<fin bloque>\t\t"+lexer.lexico+"\n";break;}
                 case Multiplicacion:{resultado+= "<operador aritmetico>\t\t"+lexer.lexico+"\n";;}
@@ -198,10 +229,8 @@ public class Controller {
         }else {
             if (primerinicio){
                 //aqui poner el file save
-                String ruta="c:"+File.separator+"Users"+File.separator+System.getProperty("user.name")+File.separator+"Documents"+File.separator+"Panda projects";
-                ruta=ruta.replace(File.separator,"/");
                 FileChooser fileChooser=new FileChooser();
-                fileChooser.setInitialDirectory(new File(ruta));
+                fileChooser.setInitialDirectory(new File(ruta_global));
                 fileChooser.setInitialFileName("Nuevo proyecto");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Panda project","*.panda"));
                 File destino=fileChooser.showSaveDialog(Main.stage);
@@ -237,10 +266,8 @@ public class Controller {
 
 
     public void abrir(){
-        String ruta="c:"+File.separator+"Users"+File.separator+System.getProperty("user.name")+File.separator+"Documents"+File.separator+"Panda projects";
-        ruta=ruta.replace(File.separator,"/");
         FileChooser fileChooser=new FileChooser();
-        fileChooser.setInitialDirectory(new File(ruta));
+        fileChooser.setInitialDirectory(new File(ruta_global));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PANDA Files (*.panda)","*.panda"));
        File archivo_abierto=null;
        if (!(proyecto==null)){
@@ -323,16 +350,31 @@ public class Controller {
     }
 
     public void guardar_archivo(File archivo, String documento){
+        String doc=documento.replace("proyecto",FilenameUtils.getBaseName(archivo.getName()));
         String mensaje=null;
         try {
             FileOutputStream salida=new FileOutputStream(archivo);
-            byte[] text=documento.getBytes();
+            byte[] text=doc.getBytes();
             salida.write(text);
             System.out.println("archivo guardado");
+            configuraciones.remplazar_texto(configuraciones.obtener_texto().replace("proyecto",FilenameUtils.getBaseName(archivo.getName())));
         } catch (Exception e) { }
 
     }
 
+    public String crear_carpeta_dafault(){
+        String unidad=System.getProperty("user.dir").toString().substring(0,1);
+        String ruta=unidad+":"+File.separator+"Users"+File.separator+System.getProperty("user.name")+File.separator+"Documents"+File.separator+"Panda projects";
+        ruta=ruta.replace(File.separator,"/");
+        File carpeta=new File(ruta);
+        boolean a=carpeta.mkdir();
+        if (a){
+            System.out.println("se creo la carpeta default");
+        }else {
+            System.out.println("la carpeta default ya existe");
+        }
+        return ruta;
+    }
 
 
 }

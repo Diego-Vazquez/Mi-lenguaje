@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -20,8 +21,11 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent event) {
                 Controller.auxiliar.detener_hilo();
+
             }
         });
+
+        try{ primaryStage.getIcons().add(new Image("sample/icono.png"));}catch (Exception e){}
         primaryStage.show();
     }
 

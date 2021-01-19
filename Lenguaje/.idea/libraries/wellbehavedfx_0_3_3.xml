@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="wellbehavedfx-0.3.3">
     <CLASSES>
-      <root url="jar://D:/Users/Diego/Librerias java/jar_files/wellbehavedfx-0.3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/richtextfx/wellbehavedfx-0.3.3.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -35,6 +35,7 @@ public enum Tokens {
     decremento,
     operador_boleano,
     Identificador,
+    Cadena,
     Numero,
     ERROR,
     comilla

@@ -67,14 +67,14 @@ public class proyecto {
     }
 
     public String crear_carpeta_dafault(){
-        String ruta="c:"+File.separator+"Users"+File.separator+System.getProperty("user.name")+File.separator+"Documents"+File.separator+"Panda projects";
-        carpeta=new File(ruta.replace(File.separator,"/"));
+        String ruta=Controller.ruta_global;
+        carpeta=new File(ruta);
         ruta=ruta.concat(File.separator);
         boolean a=carpeta.mkdir();
         if (a){
-            System.out.println("se creo la carpeta default");
+            System.out.println("se creo el proyecto");
         }else {
-            System.out.println("no se creo la carpeta default");
+            System.out.println("no se creo el proyecto");
         }
         return ruta.replace(File.separator,"/");
     }

@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="commons-io-2.4">
     <CLASSES>
-      <root url="jar://D:/Users/Diego/Librerias java/commons-io-2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/commons-io-2.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,7 +1,11 @@
 package sample;
 
+import javafx.collections.ListChangeListener;
 import javafx.concurrent.Task;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.fxmisc.flowless.VirtualizedScrollPane;
@@ -85,10 +89,12 @@ public class Configuraciones {
 
         // call when no longer need it: `cleanupWhenFinished.unsubscribe();`
 
+
+
         codeArea.replaceText(0, 0, sampleCode);
-        codeArea.setStyle("-fx-font-size: 16; -fx-font-family: HATTEN;");
+        codeArea.setStyle("-fx-font-size: 18; -fx-font-family: consolas;");
         StackPane stackPane=new StackPane(new VirtualizedScrollPane<>(codeArea));
-        stackPane.setPrefSize(this.weight,this.hight);
+        stackPane.prefHeightProperty().bind(vBox.heightProperty());
         vBox.getChildren().add(stackPane);
     }
 

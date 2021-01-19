@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="reactfx-2.0-M5">
     <CLASSES>
-      <root url="jar://D:/Users/Diego/Librerias java/jar_files/reactfx-2.0-M5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/richtextfx/reactfx-2.0-M5.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

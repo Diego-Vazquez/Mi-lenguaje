@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="flowless-0.6.1">
     <CLASSES>
-      <root url="jar://D:/Users/Diego/Librerias java/jar_files/flowless-0.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/richtextfx/flowless-0.6.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

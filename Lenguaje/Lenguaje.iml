@@ -7,14 +7,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="commons-io-2.4" level="project" />
     <orderEntry type="library" name="jflex-1.4.3" level="project" />
-    <orderEntry type="library" name="java-cup-11" level="project" />
-    <orderEntry type="library" name="java_cup" level="project" />
-    <orderEntry type="library" name="flowless-0.6.1" level="project" />
-    <orderEntry type="library" name="reactfx-2.0-M5" level="project" />
-    <orderEntry type="library" name="richtextfx-0.10.5" level="project" />
-    <orderEntry type="library" name="undofx-2.1.0" level="project" />
+    <orderEntry type="library" name="commons-io-2.4" level="project" />
     <orderEntry type="library" name="wellbehavedfx-0.3.3" level="project" />
+    <orderEntry type="library" name="undofx-2.1.0" level="project" />
+    <orderEntry type="library" name="richtextfx-0.10.5" level="project" />
+    <orderEntry type="library" name="reactfx-2.0-M5" level="project" />
+    <orderEntry type="library" name="flowless-0.6.1" level="project" />
+    <orderEntry type="library" name="java-cup-11b" level="project" />
+    <orderEntry type="library" name="java-cup-11b-runtime" level="project" />
   </component>
 </module>
