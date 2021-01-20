@@ -8,6 +8,7 @@ parser code
     private Symbol s;
     public static String codigo_error="0";
     public static String mensaje_error="";
+    public static String Imprimir="";
 
 
 
@@ -236,15 +237,15 @@ if (existe(a.toString())){
 
 PRINT ::= Print Parentesis_a CADENAS:a Parentesis_b Punto_y_coma
 {:
-String cade=a.toString(); Controller.consola_aux.setText(cade);
+String cade=a.toString(); Imprimir=Imprimir+cade+"\n";
 :}
 |Print Parentesis_a IDENTIFICADOR:a Parentesis_b Punto_y_coma
 {:
-String cade=variables.get(buscar_variable(a.toString())).getValor(); Controller.consola_aux.setText(cade);
+String cade=variables.get(buscar_variable(a.toString())).getValor(); Imprimir=Imprimir+cade+"\n";
 :}
 |Print Parentesis_a IDENTIFICADOR:i Suma CADENAS:a Parentesis_b Punto_y_coma
 {:
-String cade=variables.get(buscar_variable(i.toString())).getValor()+a.toString(); Controller.consola_aux.setText(cade);
+String cade=variables.get(buscar_variable(i.toString())).getValor()+a.toString(); Imprimir=Imprimir+cade+"\n";
 :};
 
 IF ::= If Dos_puntos SENTENCIA_BOOLEANA Corchete_a INSTRUCCIONES Corchete_b | If Dos_puntos SENTENCIA_BOOLEANA Corchete_a Corchete_b;

@@ -68,12 +68,14 @@ public class Controller {
 
     public void analizar_sintaxis() throws IOException {
         //aun no terminado
+        Sintax.Imprimir="";
         if (!consola.getText().isEmpty()){consola.clear();}
         String ST=(String) configuraciones.obtener_texto();
 
         Sintax s=new Sintax(new sample.Cup(new StringReader(ST)));
         try {
             s.parse();
+            consola.setText(Sintax.Imprimir);
             consola.appendText("    \n\n\n** La sintaxis es correcta **");
 
 

@@ -410,6 +410,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
     private Symbol s;
     public static String codigo_error="0";
     public static String mensaje_error="";
+    public static String Imprimir="";
 
 
 
@@ -955,7 +956,7 @@ if (existe(a.toString())){
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-2)).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintax$stack.elementAt(CUP$Sintax$top-2)).value;
 		
-String cade=a.toString(); Controller.consola_aux.setText(cade);
+String cade=a.toString(); Imprimir=Imprimir+cade+"\n";
 
               CUP$Sintax$result = parser.getSymbolFactory().newSymbol("PRINT",17, ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-4)), ((java_cup.runtime.Symbol)CUP$Sintax$stack.peek()), RESULT);
             }
@@ -969,7 +970,7 @@ String cade=a.toString(); Controller.consola_aux.setText(cade);
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-2)).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintax$stack.elementAt(CUP$Sintax$top-2)).value;
 		
-String cade=variables.get(buscar_variable(a.toString())).getValor(); Controller.consola_aux.setText(cade);
+String cade=variables.get(buscar_variable(a.toString())).getValor(); Imprimir=Imprimir+cade+"\n";
 
               CUP$Sintax$result = parser.getSymbolFactory().newSymbol("PRINT",17, ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-4)), ((java_cup.runtime.Symbol)CUP$Sintax$stack.peek()), RESULT);
             }
@@ -986,7 +987,7 @@ String cade=variables.get(buscar_variable(a.toString())).getValor(); Controller.
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-2)).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintax$stack.elementAt(CUP$Sintax$top-2)).value;
 		
-String cade=variables.get(buscar_variable(i.toString())).getValor()+a.toString(); Controller.consola_aux.setText(cade);
+String cade=variables.get(buscar_variable(i.toString())).getValor()+a.toString(); Imprimir=Imprimir+cade+"\n";
 
               CUP$Sintax$result = parser.getSymbolFactory().newSymbol("PRINT",17, ((java_cup.runtime.Symbol)CUP$Sintax$stack.elementAt(CUP$Sintax$top-6)), ((java_cup.runtime.Symbol)CUP$Sintax$stack.peek()), RESULT);
             }
