@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="richtextfx">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/richtextfx/flowless-0.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/richtextfx/wellbehavedfx-0.3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/richtextfx/richtextfx-0.10.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/richtextfx/reactfx-2.0-M5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/richtextfx/undofx-2.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

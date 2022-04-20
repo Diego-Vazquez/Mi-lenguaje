@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/jfxswt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/jfr.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/jce.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/charsets.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/jsse.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/management-agent.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/out/artifacts/Lenguaje/bundles/Lenguaje/runtime/lib/resources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

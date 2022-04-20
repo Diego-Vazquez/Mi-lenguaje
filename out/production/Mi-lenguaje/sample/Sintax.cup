@@ -1,0 +1,350 @@
+package sample;
+
+import java_cup.runtime.Symbol;
+import java.util.ArrayList;
+
+parser code
+{:
+    private Symbol s;
+    public static String codigo_error="0";
+    public static String mensaje_error="";
+    public static String Imprimir="";
+
+
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+    public static ArrayList<Variables>variables=new ArrayList<>();
+
+      public int buscar_variable(String nombre){
+              int posicion=0;
+              for (int i = 0; i < variables.size(); i++) {
+                if (variables.get(i).getNombre().equals(nombre)){
+                  posicion=i;
+                  break;
+                }
+              }
+              return posicion;
+        }
+        public boolean existe(String nombre){
+          boolean exi=false;
+          for (int i = 0; i < variables.size(); i++) {
+            if (variables.get(i).getNombre().equals(nombre)){
+              exi=true;
+              break;
+            }
+          }
+          return exi;
+        }
+        public static void colector_de_basura(){
+             variables.clear();
+        }
+
+
+
+
+:};
+
+terminal If, Else, For, Do, Switch, Bol, Case, Print, While, Main, Void, Igual, Parentesis_a, Dos_puntos, Parentesis_b, Corchete_a, Corchete_b, Punto_y_coma, Coma, Punto, Operador_relacional, Operador_logico, Not,
+Incremento, Decremento, True, False, Comillas, Error;
+terminal String Numero;
+terminal String DECIMAL;
+terminal String Llave_a;
+terminal String Llave_b;
+terminal String Identificador, Cadena;
+terminal String Str;
+terminal Double Dobl;
+terminal Integer Int;
+terminal String Suma;
+terminal String Resta;
+terminal String Multiplicacion;
+terminal String Division;
+terminal String UMENOS;
+
+non terminal INICIO, DECLARACION, DECLARACIONES, SENTENCIAS, INSTRUCCIONES, INSTRUCCION, CADENAS, IDENTIFICADOR, CADENA_COMPUESTA,
+FOR, IF, IF_ELSE, WHILE, DO_WHILE, SENTENCIA_BOOLEANA, SENTENCIA_FOR, SWITCH, PRINT, SENTENCIA_SWITCH;
+non terminal OPERACIONES;
+non terminal Double expresion;
+
+precedence left Suma,Resta;
+precedence left Multiplicacion,Division;
+precedence right UMENOS;
+
+
+
+
+
+
+
+
+start with INICIO;
+
+INICIO ::= IDENTIFICADOR Corchete_a Int Main Parentesis_a Void Parentesis_b Corchete_a INSTRUCCIONES Corchete_b Corchete_b;
+
+IDENTIFICADOR ::= Identificador:a{:RESULT=a;:};
+
+INSTRUCCIONES ::= INSTRUCCION INSTRUCCIONES|INSTRUCCION;
+
+INSTRUCCION ::= DECLARACIONES|SENTENCIAS;
+
+SENTENCIAS ::= PRINT
+| FOR
+| IF
+| IF_ELSE
+| WHILE
+| DO_WHILE
+| SWITCH;
+
+DECLARACIONES ::= DECLARACION;
+
+DECLARACION ::= IDENTIFICADOR:a Dos_puntos Int Punto_y_coma
+{:
+         if (existe(a.toString())){
+		   //la variable no se declara si ya existe
+         }else {
+           variables.add(new Variables(a.toString(),"int"));
+         }
+:}
+|IDENTIFICADOR:a Dos_puntos Int Igual Numero:num Punto_y_coma
+{:
+              if (existe(a.toString())){
+                //la variable no se declara si ya existe
+              }else {
+                variables.add(new Variables(a.toString(),"int",String.valueOf(num)));
+              }
+:}
+|IDENTIFICADOR:a Dos_puntos Dobl Punto_y_coma
+{:
+ if (existe(a.toString())){
+     //la variable no se declara si ya existe
+ }else {
+    variables.add(new Variables(a.toString(),"dobl"));
+ }
+:}
+|IDENTIFICADOR:a Dos_puntos Dobl Igual DECIMAL:b Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+    variables.add(new Variables(a.toString(),"dobl",b));
+}
+:}
+|IDENTIFICADOR:a Dos_puntos Str Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+    variables.add(new Variables(a.toString(),"str"));
+}
+:}
+|IDENTIFICADOR:a Dos_puntos Str Igual CADENAS:c Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+    variables.add(new Variables(a.toString(),"str",c.toString()));
+}
+:}
+|IDENTIFICADOR:a Dos_puntos Bol Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+    variables.add(new Variables(a.toString(),"bol"));
+}
+:}
+|IDENTIFICADOR:a Dos_puntos Bol Igual True Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+    variables.add(new Variables(a.toString(),"bol","true"));
+}
+:}
+|IDENTIFICADOR:a Dos_puntos Bol Igual False Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+    variables.add(new Variables(a.toString(),"bol","false"));
+}
+:}
+|IDENTIFICADOR:a Igual Numero:f Punto_y_coma
+{:
+if(existe(a.toString())){variables.get(buscar_variable(a.toString())).setValor(String.valueOf(f));}else{}
+:}
+|IDENTIFICADOR:a Igual CADENAS:c Punto_y_coma
+{:
+if(existe(a.toString())){variables.get(buscar_variable(a.toString())).setValor(c.toString());}else{}
+:}
+|IDENTIFICADOR:a Igual DECIMAL:b Punto_y_coma
+{:
+if(existe(a.toString())){variables.get(buscar_variable(a.toString())).setValor(b);}else{}
+:}
+|IDENTIFICADOR:a Igual True Punto_y_coma
+{:
+if(existe(a.toString())){variables.get(buscar_variable(a.toString())).setValor("true");}else{}
+:}
+|IDENTIFICADOR:a Igual False Punto_y_coma
+{:
+if(existe(a.toString())){variables.get(buscar_variable(a.toString())).setValor("false");}else{}
+:}
+|IDENTIFICADOR:b Igual OPERACIONES:a Punto_y_coma
+{:
+ if (existe(b.toString())){
+                String condicion=variables.get(buscar_variable(b.toString())).getTipo().trim().replace(" ","");
+                String dd=a.toString().trim().replace(" ","");
+                switch (condicion){
+                  case "int":{
+                    if(dd.endsWith(".0")){
+                      double conas=Double.parseDouble(dd);
+                      int re= (int) conas;
+                      variables.get(buscar_variable(b.toString())).setValor(re+"");
+                    }else{
+                      codigo_error="0i";mensaje_error="La variable: "+b.toString()+" es del tipo int y la operacion es del tipo dobl";
+
+                    }break;}
+                  case "dobl":{ variables.get(buscar_variable(b.toString())).setValor(a.toString()); break;}
+                }
+              }else{
+
+              }
+:}
+|IDENTIFICADOR:a Dos_puntos Dobl Igual OPERACIONES:b Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+    variables.add(new Variables(a.toString(),"dobl",b.toString()));
+}
+:}
+|IDENTIFICADOR:a Dos_puntos Int Igual OPERACIONES:b Punto_y_coma
+{:
+if (existe(a.toString())){
+     //la variable no se declara si ya existe
+}else {
+     String dd=b.toString().trim().replace(" ","");
+     double conas=Double.parseDouble(dd);
+     int re= (int) conas;
+     variables.get(buscar_variable(a.toString())).setValor(re+"");
+}
+:};
+
+PRINT ::= Print Parentesis_a CADENAS:a Parentesis_b Punto_y_coma
+{:
+String cade=a.toString(); Imprimir=Imprimir+cade+"\n";
+:}
+|Print Parentesis_a IDENTIFICADOR:a Parentesis_b Punto_y_coma
+{:
+String cade=variables.get(buscar_variable(a.toString())).getValor(); Imprimir=Imprimir+cade+"\n";
+:}
+|Print Parentesis_a IDENTIFICADOR:i Suma CADENAS:a Parentesis_b Punto_y_coma
+{:
+String cade=variables.get(buscar_variable(i.toString())).getValor()+a.toString(); Imprimir=Imprimir+cade+"\n";
+:};
+
+IF ::= If Dos_puntos SENTENCIA_BOOLEANA Corchete_a INSTRUCCIONES Corchete_b | If Dos_puntos SENTENCIA_BOOLEANA Corchete_a Corchete_b;
+SENTENCIA_BOOLEANA ::= True
+| False
+| Identificador Operador_relacional True
+| Identificador Operador_relacional False
+| Identificador Operador_relacional Numero
+| Identificador Operador_relacional Identificador
+| Identificador Operador_relacional Numero Punto Numero
+| Identificador Operador_relacional Cadena
+| Identificador Operador_relacional Comillas Comillas
+| SENTENCIA_BOOLEANA Operador_logico True
+| SENTENCIA_BOOLEANA Operador_logico False
+| SENTENCIA_BOOLEANA Operador_logico Identificador Operador_relacional True
+| SENTENCIA_BOOLEANA Operador_logico Identificador Operador_relacional False
+| SENTENCIA_BOOLEANA Operador_logico Identificador Operador_relacional Numero
+| SENTENCIA_BOOLEANA Operador_logico Identificador Operador_relacional Identificador
+| SENTENCIA_BOOLEANA Operador_logico Identificador Operador_relacional Numero Punto Numero
+| SENTENCIA_BOOLEANA Operador_logico Identificador Operador_relacional Cadena
+| SENTENCIA_BOOLEANA Operador_logico Identificador Operador_relacional Comillas Comillas;
+
+IF_ELSE ::= IF Else Corchete_a Corchete_b | IF Else Corchete_a INSTRUCCIONES Corchete_b;
+
+FOR ::= For Dos_puntos Numero Dos_puntos Numero Corchete_a Corchete_b
+| For Dos_puntos Numero Dos_puntos Numero Corchete_a INSTRUCCIONES Corchete_b
+| For Parentesis_a Identificador Dos_puntos Int Igual Numero Punto_y_coma Identificador Operador_relacional Numero Punto_y_coma
+Incremento Parentesis_b Corchete_a Corchete_b
+| For Parentesis_a Identificador Dos_puntos Int Igual Numero Punto_y_coma Identificador Operador_relacional Numero Punto_y_coma
+Incremento Parentesis_b Corchete_a INSTRUCCIONES Corchete_b;
+
+DO_WHILE ::= Do Dos_puntos Corchete_a Corchete_b While Dos_puntos SENTENCIA_BOOLEANA Punto_y_coma
+| Do Dos_puntos Corchete_a INSTRUCCIONES Corchete_b While Dos_puntos SENTENCIA_BOOLEANA Punto_y_coma;
+
+SWITCH ::= Switch Dos_puntos Identificador Corchete_a SENTENCIA_SWITCH Corchete_b;
+
+SENTENCIA_SWITCH ::= Case Numero Dos_puntos Corchete_a Corchete_b Punto_y_coma
+| Case Numero Dos_puntos Corchete_a INSTRUCCIONES Corchete_b Punto_y_coma
+| Case Cadena Dos_puntos Corchete_a Corchete_b Punto_y_coma
+| Case Cadena Dos_puntos Corchete_a INSTRUCCIONES Corchete_b Punto_y_coma
+| SENTENCIA_SWITCH Case Cadena Dos_puntos Corchete_a Corchete_b Punto_y_coma
+| SENTENCIA_SWITCH Case Cadena Dos_puntos Corchete_a INSTRUCCIONES Corchete_b Punto_y_coma
+| SENTENCIA_SWITCH Case Numero Dos_puntos Corchete_a Corchete_b Punto_y_coma
+| SENTENCIA_SWITCH Case Numero Dos_puntos Corchete_a INSTRUCCIONES Corchete_b Punto_y_coma;
+
+WHILE ::= While Dos_puntos SENTENCIA_BOOLEANA Corchete_a Corchete_b
+| While Dos_puntos SENTENCIA_BOOLEANA Corchete_a INSTRUCCIONES Corchete_b;
+
+
+
+
+
+
+
+
+
+
+CADENAS ::= Cadena:a
+{:
+RESULT=a.replace("\"","");
+:}
+| CADENAS:x CADENA_COMPUESTA:c
+{:
+	String a=x.toString();
+	String b=c.toString();
+	String cadena="";
+	cadena=cadena+a+b;
+	RESULT=cadena.replace("\"","");
+
+:};
+
+CADENA_COMPUESTA ::= Suma Identificador:b
+{:
+
+         if (variables.get(buscar_variable(b)).getValor().isEmpty()){
+        		  RESULT="null";
+         }else {
+                  RESULT=variables.get(buscar_variable(b)).getValor();
+         }
+
+
+
+
+:}
+| Suma Cadena:b{:RESULT=b;:};
+
+
+OPERACIONES ::= Llave_a expresion:e Llave_b{: RESULT=e; :};
+
+expresion ::=   Resta expresion:a                      {:RESULT=a*-1;:}%prec UMENOS
+                |  expresion:a Suma        expresion:b     {:RESULT=a+b;:}
+                |  expresion:a Resta      expresion:b     {:RESULT=a-b;:}
+                |  expresion:a Multiplicacion        expresion:b     {:RESULT=a*b;:}
+                |  expresion:a Division   expresion:b     {:RESULT=a/b;:}
+                |  Numero:a                               {:RESULT=new Double(a);:}
+                |  DECIMAL:a                              {:RESULT=new Double(a);:}
+                |  Identificador:a                        {:String n=variables.get(buscar_variable(a)).getValor(); RESULT=new Double(n);:}
+                |  Parentesis_a expresion:a Parentesis_b              {:RESULT=a;:}
+               ;
+
+
+

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Libraries">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/java-cup-11b-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/jflex-1.4.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/java-cup-11b.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Lenguaje/Libraries/commons-io-2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
